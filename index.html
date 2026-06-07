@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Dheplaeee!</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0c10;
+      --surface: #0f1318;
+      --border: #1e2530;
+      --green: #39ff9a;
+      --cyan: #00e5ff;
+      --pink: #ff3cac;
+      --gold: #ffd700;
+      --text: #c9d1d9;
+      --muted: #4a5568;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    
+    
+    
+    
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.07) 2px,
+        rgba(0,0,0,0.07) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    
+    
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(57,255,154,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,255,154,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridScroll 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes gridScroll {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(40px, 40px); }
+    }
+
+    
+    
+    
+    
+    
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+    .particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: float linear infinite;
+      opacity: 0;
+    }
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    
+    
+    
+    
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    
+    
+    
+    
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 60px;
+      opacity: 0;
+      animation: fadeDown 0.6s ease forwards 0.2s;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.red   { background: #ff5f57; }
+    .dot.yellow{ background: #febc2e; }
+    .dot.green { background: #28c840; }
+    .tab-label {
+      margin-left: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .tab-label span { color: var(--green); }
+    .hero { margin-bottom: 60px; }
+
+    .comment-line {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      opacity: 0;
+      animation: fadeRight 0.5s ease forwards;
+    }
+    .comment-line:nth-child(1) { animation-delay: 0.4s; }
+    .comment-line:nth-child(2) { animation-delay: 0.55s; }
+    .comment-line:nth-child(3) { animation-delay: 0.7s; }
+
+    .keyword { color: #ff7b72; }
+    .func    { color: #d2a8ff; }
+    .string  { color: var(--green); }
+    .num     { color: var(--cyan); }
+    .op      { color: var(--muted); }
+    .var     { color: #ffa657; }
+
+    .big-title {
+      font-family: var(--font-mono);
+      font-size: clamp(36px, 8vw, 90px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin: 28px 0 12px;
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) forwards 0.9s;
+    }
+    .big-title .line1 { display: block; color: var(--text); }
+    .big-title .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 50%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 1.3s;
+    }
+    .subtitle span { color: var(--cyan); }
+
+    
+    
+    
+    
+    .terminal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+      box-shadow: 0 0 40px rgba(57,255,154,0.05);
+      transition: box-shadow 0.3s;
+    }
+    .terminal:hover { box-shadow: 0 0 60px rgba(57,255,154,0.12); }
+
+    .term-header {
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .term-header .dots { display: flex; gap: 6px; }
+    .term-header .label {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .term-body {
+      padding: 24px;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .prompt { color: var(--green); }
+    .cursor {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: var(--green);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+      margin-left: 2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+  
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .card.green::before  { background: linear-gradient(90deg, var(--green), transparent); }
+    .card.cyan::before   { background: linear-gradient(90deg, var(--cyan), transparent); }
+    .card.pink::before   { background: linear-gradient(90deg, var(--pink), transparent); }
+    .card.gold::before   { background: linear-gradient(90deg, var(--gold), transparent); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .card.green:hover  { border-color: rgba(57,255,154,0.4); }
+    .card.cyan:hover   { border-color: rgba(0,229,255,0.4); }
+    .card.pink:hover   { border-color: rgba(255,60,172,0.4); }
+    .card.gold:hover   { border-color: rgba(255,215,0,0.4); }
+
+    .card-icon { font-size: 28px; margin-bottom: 12px; }
+    .card-title { font-size: 12px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+    .card-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .card.green  .card-value { color: var(--green); }
+    .card.cyan   .card-value { color: var(--cyan); }
+    .card.pink   .card-value { color: var(--pink); }
+    .card.gold   .card-value { color: var(--gold); }
+    .wish-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 32px;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+      text-align: center;
+    }
+    .wish-block::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, rgba(57,255,154,0.15), rgba(0,229,255,0.05), rgba(255,60,172,0.1));
+      z-index: -1;
+    }
+    .wish-title {
+      font-family: var(--font-sans);
+      font-size: clamp(18px, 4vw, 28px);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .wish-title .ayan { color: var(--green); }
+    .wish-text {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
+    .wish-text .hl { color: var(--cyan); }
+
+    
+    
+    
+    .btn-deploy {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 14px 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .btn-deploy::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--green);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 0;
+    }
+    .btn-deploy:hover::before { transform: translateX(0); }
+    .btn-deploy:hover { color: var(--bg); }
+    .btn-deploy span { position: relative; z-index: 1; }
+
+    
+    
+    
+    
+    
+    
+    .progress-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    .progress-label span:last-child { color: var(--green); }
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 999px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    
+    
+    .progress-fill.green { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .progress-fill.pink  { background: linear-gradient(90deg, var(--pink), #ff8c69); }
+    .progress-fill.gold  { background: linear-gradient(90deg, var(--gold), #ffaa00); }
+
+    
+    
+    
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 60px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+      letter-spacing: 0.1em;
+    }
+    .footer .green { color: var(--green); }
+
+    
+    
+    
+    .confetti-piece {
+      position: fixed;
+      width: 8px; height: 8px;
+      pointer-events: none;
+      z-index: 9000;
+      animation: confettiFall linear forwards;
+      opacity: 0;
+      border-radius: 2px;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @keyframes fadeUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeRight{ from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    .terminal:nth-child(1) { animation-delay: 1.6s; }
+    .card:nth-child(1) { animation-delay: 1.9s; }
+    .card:nth-child(2) { animation-delay: 2.05s; }
+    .card:nth-child(3) { animation-delay: 2.2s; }
+    .card:nth-child(4) { animation-delay: 2.35s; }
+    .wish-block       { animation-delay: 2.6s; }
+    .progress-section { animation-delay: 2.8s; }
+    .footer           { animation-delay: 3s; }
+
+    @media (max-width: 600px) {
+      main { padding: 40px 16px 80px; }
+      .wish-block { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="particles" id="particles"></div>
+
+<main>
+  <div class="topbar">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+    <span class="tab-label">shariq's_birthday.<span>exe</span> &nbsp;—&nbsp; bash</span>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="hero">
+    <div class="comment-line"><span class="op">// </span><span class="muted" style="color:#4a5568">Initializing birthday.js — June 8, 2026</span></div>
+    <div class="comment-line"><span class="op">// </span><span class="muted" style="color:#4a5568">Wisher &nbsp;— &nbsp;<span style="color:var(--cyan)">Faiz(Bendaaa)</span>  &nbsp;|&nbsp; Status: DEPLOYED</span></div>
+    <div class="comment-line"><span class="op">// </span><span class="muted" style="color:#4a5568">Developer — <span style="color:var(--green)">Bendaaa</span>  </span></div>
+
+    <h1 class="big-title">
+      <span class="line1">Happy Birthday,</span>
+      <span class="line2">Shariq Fahad Shaikh(Dheplae)</span>
+    </h1>
+    <p class="subtitle">git tag <span>v1.0.0</span> — another year shipped </p>
+  </div>
+
+  <!--Terminal-->
+  <div class="terminal">
+    <div class="term-header">
+      <div class="dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <span class="label">terminal &nbsp;⌘</span>
+    </div>
+    <div class="term-body">
+      <div><span class="prompt">shariq@life:~$</span> <span class="var">node</span> birthday.js</div>
+      <div style="color:var(--muted)">  &gt; Booting up...</div>
+      <div><span class="string">&nbsp; ✓ &nbsp;Loading memories... <span style="color:var(--green)">done</span></span></div>
+      <div><span class="string">&nbsp; ✓ &nbsp;Compiling laughter... <span style="color:var(--green)">done</span></span></div>
+      <div><span class="string">&nbsp; ✓ &nbsp;Installing happiness@latest... <span style="color:var(--green)">done</span></span></div>
+      <div><span class="string">&nbsp; ✓ &nbsp;Deploying new year... <span style="color:var(--cyan)">success</span></span></div>
+      <div style="margin-top:8px"><span class="prompt">shariq@life:~$</span> <span class="var">echo</span> <span class="string">"Happy Birthday! "</span></div>
+      <div style="color:var(--gold);font-weight:700">  Happy Birthday! </div>
+      <div style="margin-top:8px"><span class="prompt">shariq@life:~$</span> <span class="cursor"></span></div>
+    </div>
+  </div>
+
+  
+  <div class="cards">
+    <div class="card green">
+      <div class="card-icon"></div>
+      <div class="card-title">Age.version</div>
+      <div class="card-value">17 years</div>
+    </div>
+    <div class="card cyan">
+      <div class="card-icon"></div>
+      <div class="card-title">Build Status</div>
+      <div class="card-value">PASSING ✓</div>
+    </div>
+    <div class="card pink">
+      <div class="card-icon"></div>
+      <div class="card-title">Bug Count</div>
+      <div class="card-value">0 Found</div>
+    </div>
+    <div class="card gold">
+      <div class="card-icon"></div>
+      <div class="card-title">Stars</div>
+      <div class="card-value">∞ Earned</div>
+    </div>
+  </div>
+
+  
+  
+  
+  
+  <div class="progress-section">
+    <div class="progress-label"><span>// Life Goals Achieved</span><span class="val-goals">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill green" id="prog1"></div></div>
+
+    <div class="progress-label"><span>// Vibes Deployed</span><span class="val-vibes">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill pink" id="prog2"></div></div>
+
+    <div class="progress-label"><span>// Adventures Unlocked</span><span class="val-adv">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill gold" id="prog3"></div></div>
+  </div>
+
+  
+  <div class="wish-block">
+    <div class="wish-title">To the legendary <span class="shariq">Dhepla</span> </div>
+    <p class="wish-text">
+      May this new year bring you <span class="hl">endless happiness</span>,<br>
+      fill your life with <span class="hl">beautiful moments</span> worth remembering.<br>
+      Another year added to your story —<br>
+      <span class="hl">but still doin nothing. <br><br>
+      <strong style="color:var(--green)">Happy Birthday, Dheplaeee! </strong>
+    </p>
+    <button class="btn-deploy" onclick="celebrate()">
+      <span> &nbsp;npm run celebrate</span>
+    </button>
+  </div>
+
+  <div class="footer">
+    <p>Made with <span class="green">Love</span> by your frnd &nbsp;·&nbsp; <span class="green">Faiz Khan</span> &nbsp;·&nbsp; <span class="green">v2026.06.06</span></p>
+  </div>
+
+</main>
+
+
+
+
+
+<script>
+  const container = document.getElementById('particles');
+  const colors = ['#39ff9a','#00e5ff','#ff3cac','#ffd700'];
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay    = (Math.random() * 10) + 's';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+    container.appendChild(p);
+  }
+
+  
+  
+  
+  
+  
+  function animateProgress() {
+    setTimeout(() => {
+      document.getElementById('prog1').style.width = '87%';
+      document.querySelector('.val-goals').textContent = '87%';
+    }, 3200);
+    setTimeout(() => {
+      document.getElementById('prog2').style.width = '100%';
+      document.querySelector('.val-vibes').textContent = '100%';
+    }, 3400);
+    setTimeout(() => {
+      document.getElementById('prog3').style.width = '74%';
+      document.querySelector('.val-adv').textContent = '74%';
+    }, 3600);
+  }
+  animateProgress();
+
+  
+  
+  
+  
+  
+  
+  function celebrate() {
+    const confettiColors = ['#39ff9a','#00e5ff','#ff3cac','#ffd700','#ff7b72','#d2a8ff'];
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement('div');
+      c.classList.add('confetti-piece');
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.top = '-10px';
+      c.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      c.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+      c.style.animationDelay = (Math.random() * 0.8) + 's';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      document.body.appendChild(c);
+      c.addEventListener('animationend', () => c.remove());
+    }
+  }
+
+  
+  
+  
+  
+  const lines = document.querySelectorAll('.term-body > div');
+  lines.forEach((line, i) => {
+    line.style.opacity = '0';
+    setTimeout(() => { line.style.opacity = '1'; }, 1800 + i * 200);
+  });
+</script>
+</body>
+</html>
